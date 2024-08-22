@@ -12,7 +12,9 @@
         "http": {
             "commandName": "Project",
             "dotnetRunMessages": true,
+            "hotReloadEnabled": true,
             "launchBrowser": true,
+            "launchUrl": "swagger",
             "applicationUrl": "http://localhost:5099",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
@@ -21,7 +23,9 @@
         "https": {
             "commandName": "Project",
             "dotnetRunMessages": true,
+            "hotReloadEnabled": true,
             "launchBrowser": true,
+            "launchUrl": "swagger",
             "applicationUrl": "https://localhost:7279;http://localhost:5099",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
@@ -29,7 +33,9 @@
         },
         "IIS Express": {
             "commandName": "IISExpress",
+            "hotReloadEnabled": true,
             "launchBrowser": true,
+            "launchUrl": "swagger",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
