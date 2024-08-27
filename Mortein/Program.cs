@@ -9,7 +9,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo()
     {
         Title = "Mortein API",
-        Version = "0.0.1",
+        Version = Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version,
         Description = "RESTful API for the Mortein backend application",
     });
 });
