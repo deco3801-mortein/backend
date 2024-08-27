@@ -40,6 +40,7 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
+          cache-dependency-path: Mortein/packages.lock.json
 
       - run: dotnet restore Mortein/
       - run: dotnet tool restore
@@ -53,6 +54,7 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
+          cache-dependency-path: Mortein/packages.lock.json
 
       - run: dotnet restore Mortein/
       - run: dotnet tool restore
@@ -68,6 +70,7 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
+          cache-dependency-path: Mortein/packages.lock.json
 
       - run: dotnet restore Mortein/
       - run: dotnet tool restore
