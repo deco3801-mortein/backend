@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo()
+    options.SwaggerDoc("openapi", new OpenApiInfo()
     {
         Title = "Mortein API",
         Version = Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version,
@@ -18,8 +18,15 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(c =>
+    {
+        c.RouteTemplate = "{documentName}.json";
+    });
+    app.UseSwaggerUI(c =>
+    {
+        c.RoutePrefix = "docs";
+        c.SwaggerEndpoint("/openapi.json", "Mortein API");
+    });
 }
 else
 {
