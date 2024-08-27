@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
     });
     app.UseSwaggerUI(c =>
     {
+        c.DocumentTitle = "Mortein API Docs";
         c.RoutePrefix = "docs";
         c.SwaggerEndpoint("/openapi.json", "Mortein API");
     });
