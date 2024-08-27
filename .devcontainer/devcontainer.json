@@ -24,5 +24,8 @@
         }
     },
 
-    "postCreateCommand": "npm install"
+    "postCreateCommand": {
+        "npm-deps": "npm install",
+        "dotnet-deps": "dotnet restore Mortein"
+    }
 }
