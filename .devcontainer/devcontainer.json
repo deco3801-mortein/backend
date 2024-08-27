@@ -26,6 +26,8 @@
 
     "postCreateCommand": {
         "npm-deps": "npm install",
-        "dotnet-deps": "dotnet restore Mortein"
+        "dotnet-deps": "dotnet restore Mortein",
+        "dotnet-tool-deps": "dotnet tool restore",
+        "xq": "sudo apt install xq"
     }
 }
