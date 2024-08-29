@@ -31,9 +31,48 @@ jobs:
       - run: npm clean-install
       - run: npx prettier --check .
 
+  dotnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein/packages.lock.json
+
+      - run: dotnet restore Mortein/
+      - run: dotnet tool restore
+
+  dotnet-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein/packages.lock.json
+
+      - run: dotnet restore Mortein/
+      - run: dotnet tool restore
+
+      - run: dotnet build Mortein/ -warnaserror
+
   dotnet-format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein/packages.lock.json
+
+      - run: dotnet restore Mortein/
+      - run: dotnet tool restore
 
       - run: dotnet format Mortein/ --verify-no-changes
