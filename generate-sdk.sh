@@ -5,6 +5,8 @@
 # Arguments
 #   $1: API Base URL
 
+sudo apt install xq
+
 # Single-source the SDK version from `Mortein.csproj`
 version=$(xq Mortein/Mortein.csproj --xpath "/Project/PropertyGroup/FileVersion")
 
@@ -26,3 +28,6 @@ echo "Cleared mortein-sdk/index.ts"
 
 cd mortein-sdk
 npx tsc
+
+mkdir dist --parents
+npm pack --pack-destination dist
