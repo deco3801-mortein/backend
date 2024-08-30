@@ -20,8 +20,8 @@ jobs:
           sudo apt install xq
           version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
 
-          (gh api /orgs/deco3801-mortein/packages/npm/mortein-sdk/versions --jq '.[].name' \
-            | (grep --fixed-strings "${version}" > /dev/null) \
+          (gh release list --repo deco3801-mortein/backend --json tagName --jq ''.[].tagName' \
+            | (grep --fixed-strings "v${version}" > /dev/null) \
             && echo version-exists=true || echo version-exists=false) >> $GITHUB_OUTPUT
 
           echo current-version=${version} >> $GITHUB_OUTPUT
