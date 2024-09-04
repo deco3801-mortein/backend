@@ -76,3 +76,17 @@ jobs:
       - run: dotnet tool restore
 
       - run: dotnet format Mortein/ --verify-no-changes
+
+  terraform-format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: terraform fmt -check
+
+  terraform-validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: terraform validate
