@@ -20,6 +20,7 @@ cd ..
 
 # Generate the OpenAPI JSON and the SDK
 dotnet build Mortein
+dotnet swagger tofile --output ../openapi.json bin/Release/net8.0/publish/Mortein.dll openapi
 npx openapi-ts --base $1
 
 # Remove bulk exports from SDK's `index.ts` to prevent exposing multiple members with the same name.
