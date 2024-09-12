@@ -20,7 +20,7 @@ jobs:
           sudo apt install xq
           version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
 
-          (gh release list --repo deco3801-mortein/backend --json tagName --jq '.[].tagName' \
+          (gh release list --repo deco3801-mortein/api --json tagName --jq '.[].tagName' \
             | (grep --fixed-strings "v${version}" > /dev/null) \
             && echo version-exists=true || echo version-exists=false) >> $GITHUB_OUTPUT
 

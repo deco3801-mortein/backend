@@ -1,8 +1,8 @@
 {
-    "name": "Mortein Backend Application",
+    "name": "Mortein API",
     "dockerComposeFile": "docker-compose.yaml",
     "service": "devcontainer",
-    "workspaceFolder": "/workspaces/backend",
+    "workspaceFolder": "/workspaces/api",
 
     "features": {
         "ghcr.io/devcontainers/features/dotnet:2": {},
