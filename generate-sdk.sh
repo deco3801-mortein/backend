@@ -17,7 +17,7 @@ cd ..
 
 # Generate the OpenAPI JSON and the SDK
 dotnet build Mortein
-dotnet swagger tofile --output ../openapi.json --host https://api.vibegrow.pro bin/Release/net8.0/publish/Mortein.dll openapi
+dotnet swagger tofile --output openapi.json --host https://api.vibegrow.pro Mortein/bin/Debug/net8.0/Mortein.dll openapi
 npx openapi-ts
 
 # Remove bulk exports from SDK's `index.ts` to prevent exposing multiple members with the same name.
