@@ -7,8 +7,8 @@ on:
 jobs:
   check-version:
     outputs:
-      version-exists: ${{ steps.check-version.outputs.version-exists }}
-      current-version: ${{ steps.check-version.outputs.current-version }}
+      sdk-version-exists: ${{ steps.check-version.outputs.sdk-version-exists }}
+      current-sdk-version: ${{ steps.check-version.outputs.current-sdk-version }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -18,17 +18,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sudo apt install xq
-          version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
+
+          sdk_version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
+
+          echo current-sdk-version=${sdk_version} >> $GITHUB_OUTPUT
 
           (gh release list --repo deco3801-mortein/api --json tagName --jq '.[].tagName' \
-            | (grep --fixed-strings "v${version}" > /dev/null) \
-            && echo version-exists=true || echo version-exists=false) >> $GITHUB_OUTPUT
-
-          echo current-version=${version} >> $GITHUB_OUTPUT
+            | (grep --fixed-strings "v${sdk_version}" > /dev/null) \
+            && echo sdk-version-exists=true || echo sdk-version-exists=false) >> $GITHUB_OUTPUT
 
   release-sdk:
     environment: deployment
-    if: ${{ ! fromJson(needs.check-version.outputs.version-exists) }}
+    if: ${{ ! fromJson(needs.check-version.outputs.sdk-version-exists) }}
     needs: check-version
     permissions:
       contents: write
@@ -55,4 +56,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_SDK_PAT }}
-          VERSION: ${{ needs.check-version.outputs.current-version }}
+          VERSION: ${{ needs.check-version.outputs.current-sdk-version }}
