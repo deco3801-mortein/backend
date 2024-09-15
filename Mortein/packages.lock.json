@@ -226,6 +226,9 @@
                 "type": "Transitive",
                 "resolved": "6.7.3",
                 "contentHash": "exXUT9h++OU70jTCfQALiHzeBthqL7c5IFQm+aa67Hi/6X945t32NtOMO16TaRn44xFXdqMZ2CyMbgnTmx+w2A=="
+            },
+            "mortein.types": {
+                "type": "Project"
             }
         }
     }

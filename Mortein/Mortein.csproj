@@ -40,4 +40,8 @@
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../Mortein.Types/Mortein.Types.csproj" />
+    </ItemGroup>
 </Project>
