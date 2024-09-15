@@ -19,6 +19,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             Host={Environment.GetEnvironmentVariable("POSTGRES_HOST")};
             Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};
             Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")};
+            Database={Environment.GetEnvironmentVariable("POSTGRES_DB")};
             """
         );
     }
