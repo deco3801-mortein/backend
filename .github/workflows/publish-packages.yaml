@@ -22,7 +22,7 @@ jobs:
           sudo apt install xq
 
           sdk_version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
-          types_version=$(xq Mortein.Types/Mortein.Types.csproj --xpath '/Project/PropertyGroup/FileVersion')
+          types_version=$(xq Mortein.Types/Mortein.Types.csproj --xpath '/Project/PropertyGroup/Version')
 
           echo current-sdk-version=${sdk_version} >> $GITHUB_OUTPUT
           echo current-types-version=${types_version} >> $GITHUB_OUTPUT
