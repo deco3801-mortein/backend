@@ -9,6 +9,8 @@ jobs:
     outputs:
       sdk-version-exists: ${{ steps.check-version.outputs.sdk-version-exists }}
       current-sdk-version: ${{ steps.check-version.outputs.current-sdk-version }}
+      types-version-exists: ${{ steps.check-version.outputs.types-version-exists }}
+      current-types-version: ${{ steps.check-version.outputs.current-types-version }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -20,12 +22,18 @@ jobs:
           sudo apt install xq
 
           sdk_version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
+          types_version=$(xq Mortein.Types/Mortein.Types.csproj --xpath '/Project/PropertyGroup/FileVersion')
 
           echo current-sdk-version=${sdk_version} >> $GITHUB_OUTPUT
+          echo current-types-version=${types_version} >> $GITHUB_OUTPUT
 
           (gh release list --repo deco3801-mortein/api --json tagName --jq '.[].tagName' \
             | (grep --fixed-strings "v${sdk_version}" > /dev/null) \
             && echo sdk-version-exists=true || echo sdk-version-exists=false) >> $GITHUB_OUTPUT
+
+          (gh api /orgs/deco3801-mortein/packages/nuget/Mortein.Types/version --jq '.[].name' \
+            | (grep --fixed-strings "${types_version}" > /dev/null) \
+            && echo types-version-exists=true || echo types-version-exists=false) >> $GITHUB_OUTPUT
 
   release-sdk:
     environment: deployment
