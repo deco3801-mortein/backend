@@ -65,3 +65,27 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_SDK_PAT }}
           VERSION: ${{ needs.check-version.outputs.current-sdk-version }}
+
+  publish-types:
+    environment: deployment
+    if: ${{ ! fromJson(needs.check-version.outputs.types-version-exists) }}
+    needs: check-version
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
+      - run: dotnet tool restore
+
+      - run: dotnet pack Mortein.Types
+      - run: dotnet nuget push Mortein.Types/bin/Release/Mortein.Types.${VERSION}.nupkg --api-key ${{ github.token }}
+        env:
+          VERSION: ${{ needs.check-version.outputs.current-types-version }}
