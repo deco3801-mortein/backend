@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Mortein.Models;
+using Mortein.Types;
 
 namespace Mortein;
 

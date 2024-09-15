@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mortein.Models;
+namespace Mortein.Types;
 
 /// <summary>
 /// Pest-deterrent device.
