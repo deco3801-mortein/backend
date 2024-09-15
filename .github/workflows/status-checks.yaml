@@ -40,9 +40,9 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
-          cache-dependency-path: Mortein/packages.lock.json
+          cache-dependency-path: Mortein*/packages.lock.json
 
-      - run: dotnet restore Mortein/
+      - run: dotnet restore
       - run: dotnet tool restore
 
   dotnet-build:
@@ -54,12 +54,11 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
-          cache-dependency-path: Mortein/packages.lock.json
-
-      - run: dotnet restore Mortein/
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
       - run: dotnet tool restore
 
-      - run: dotnet build Mortein/ -warnaserror
+      - run: dotnet build -warnaserror
 
   dotnet-format:
     runs-on: ubuntu-24.04
@@ -70,9 +69,8 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
-          cache-dependency-path: Mortein/packages.lock.json
-
-      - run: dotnet restore Mortein/
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
       - run: dotnet tool restore
 
-      - run: dotnet format Mortein/ --verify-no-changes
+      - run: dotnet format --verify-no-changes

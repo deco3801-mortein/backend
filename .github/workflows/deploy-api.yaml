@@ -19,8 +19,8 @@ jobs:
         with:
           dotnet-version: 8
           cache: true
-          cache-dependency-path: Mortein/packages.lock.json
-      - run: dotnet restore Mortein/
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
       - run: dotnet tool restore
 
       - uses: actions/setup-node@v4
