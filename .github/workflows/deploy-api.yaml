@@ -35,8 +35,13 @@ jobs:
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/github-actions
 
-      - run: |
-          dotnet lambda deploy-serverless \
-          --s3-bucket mortein-api \
-          --stack-name MorteinApiStack
+      - env:
+          PARAMS_TEMP_FILE: /tmp/template-params
+        run: |
+          echo '${{ toJson(secrets) }}' \
+            | jq -r '
+              def transformkey(key): key | ascii_downcase | gsub("(?<word>[a-z]+)"; "\(.word[0:1] | ascii_upcase)\(.word[1:])") | gsub("_"; "");
+              [to_entries[] | {key: transformkey(.key), value: .value} | "\(.key)=\(.value)"] | join(";")
+            ' > ${{ env.PARAMS_TEMP_FILE }}
+          dotnet lambda deploy-serverless --template-parameters "$(< ${{ env.PARAMS_TEMP_FILE }})"
         working-directory: Mortein/

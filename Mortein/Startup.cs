@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 namespace Mortein;
@@ -24,6 +24,7 @@ public class Startup(IConfiguration configuration)
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddDbContext<DatabaseContext>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
         {
@@ -64,6 +65,14 @@ public class Startup(IConfiguration configuration)
         else
         {
             app.UseHttpsRedirection();
+        }
+
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+
+            var context = services.GetRequiredService<DatabaseContext>();
+            context.Database.EnsureCreated();
         }
 
         app.UseRouting();
