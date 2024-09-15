@@ -1,0 +1,91 @@
+name: Publish SDK
+
+on:
+  push:
+    branches: main
+
+jobs:
+  check-version:
+    outputs:
+      sdk-version-exists: ${{ steps.check-version.outputs.sdk-version-exists }}
+      current-sdk-version: ${{ steps.check-version.outputs.current-sdk-version }}
+      types-version-exists: ${{ steps.check-version.outputs.types-version-exists }}
+      current-types-version: ${{ steps.check-version.outputs.current-types-version }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: check-version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sudo apt install xq
+
+          sdk_version=$(xq Mortein/Mortein.csproj --xpath '/Project/PropertyGroup/FileVersion')
+          types_version=$(xq Mortein.Types/Mortein.Types.csproj --xpath '/Project/PropertyGroup/Version')
+
+          echo current-sdk-version=${sdk_version} >> $GITHUB_OUTPUT
+          echo current-types-version=${types_version} >> $GITHUB_OUTPUT
+
+          (gh release list --repo deco3801-mortein/api --json tagName --jq '.[].tagName' \
+            | (grep --fixed-strings "v${sdk_version}" > /dev/null) \
+            && echo sdk-version-exists=true || echo sdk-version-exists=false) >> $GITHUB_OUTPUT
+
+          (gh api /orgs/deco3801-mortein/packages/nuget/Mortein.Types/version --jq '.[].name' \
+            | (grep --fixed-strings "${types_version}" > /dev/null) \
+            && echo types-version-exists=true || echo types-version-exists=false) >> $GITHUB_OUTPUT
+
+  release-sdk:
+    environment: deployment
+    if: ${{ ! fromJson(needs.check-version.outputs.sdk-version-exists) }}
+    needs: check-version
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
+      - run: dotnet tool restore
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm clean-install
+
+      - run: ./generate-sdk.sh
+      - run: gh release create --generate-notes "v${VERSION}" "mortein-sdk/dist/mortein-sdk-${VERSION}.tgz"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_SDK_PAT }}
+          VERSION: ${{ needs.check-version.outputs.current-sdk-version }}
+
+  publish-types:
+    environment: deployment
+    if: ${{ ! fromJson(needs.check-version.outputs.types-version-exists) }}
+    needs: check-version
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+          cache: true
+          cache-dependency-path: Mortein*/packages.lock.json
+      - run: dotnet restore
+      - run: dotnet tool restore
+
+      - run: dotnet pack Mortein.Types
+      - run: dotnet nuget push Mortein.Types/bin/Release/Mortein.Types.${VERSION}.nupkg --api-key ${{ github.token }}
+        env:
+          VERSION: ${{ needs.check-version.outputs.current-types-version }}
