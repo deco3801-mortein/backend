@@ -1,8 +1,6 @@
 {
-    "profile": "",
     "region": "ap-southeast-2",
-    "configuration": "Release",
-    "s3-prefix": "Mortein/",
-    "template": "serverless-template.json",
-    "template-parameters": ""
+    "resolve-s3": true,
+    "stack-name": "MorteinApiStack",
+    "template": "serverless-template.json"
 }
