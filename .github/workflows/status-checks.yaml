@@ -87,7 +87,7 @@ jobs:
           echo '${{ toJson(vars) }}' \
             | jq -r 'to_entries[] | "\(.key)=\(.value)"' >> .devcontainer/.env
           echo 'GITHUB_ACTIONS=true' >> .devcontainer/.env
-      - name: Pytest
+      - name: .NET Tests
         uses: devcontainers/ci@v0.3.1900000349
         with:
           runCmd: dotnet test
