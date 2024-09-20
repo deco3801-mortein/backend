@@ -10,6 +10,8 @@ public class DatabaseContextFixture : IDisposable
     {
         DbContextOptions<DatabaseContext> options = new DbContextOptionsBuilder<DatabaseContext>().Options;
         databaseContext = new(options);
+
+        databaseContext.Database.EnsureCreated();
     }
 
     public void Dispose()
