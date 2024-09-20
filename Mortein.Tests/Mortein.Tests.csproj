@@ -17,6 +17,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="../Mortein/Mortein.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Using Include="Xunit" />
     </ItemGroup>
 </Project>
