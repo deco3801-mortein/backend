@@ -10,7 +10,7 @@ version=$(xq Mortein/Mortein.csproj --xpath "/Project/PropertyGroup/FileVersion"
 # Initialise the mortein-sdk npm package
 rm -rf mortein-sdk && mkdir mortein-sdk
 cd mortein-sdk
-npm init --yes --init-version "${version}"
+npm init --yes --init-version "${version}" --scope="@deco3801-mortein"
 jq '.files = ["**/*.d.ts", "**/*.d.ts.map", "**/*.js"]' package.json > tmp && mv tmp package.json
 npx tsc --init --declaration --declarationMap --target esnext
 cd ..
