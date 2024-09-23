@@ -74,3 +74,20 @@ jobs:
       - run: dotnet tool restore
 
       - run: dotnet format --verify-no-changes
+
+  dotnet-test:
+    environment: testing
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create .env file from `testing` Environment
+        run: |
+          echo '${{ toJson(secrets) }}' \
+            | jq -r 'to_entries[] | "\(.key)=\(.value)"' > .devcontainer/.env
+          echo '${{ toJson(vars) }}' \
+            | jq -r 'to_entries[] | "\(.key)=\(.value)"' >> .devcontainer/.env
+          echo 'GITHUB_ACTIONS=true' >> .devcontainer/.env
+      - name: .NET Tests
+        uses: devcontainers/ci@v0.3.1900000349
+        with:
+          runCmd: dotnet test

@@ -24,6 +24,7 @@ public class Startup(IConfiguration configuration)
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
         services.AddDbContext<DatabaseContext>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
@@ -79,6 +80,8 @@ public class Startup(IConfiguration configuration)
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllers();
+
             endpoints.MapGet("/", () => "Hello World!")
                 .WithOpenApi(operation => new(operation)
                 {
