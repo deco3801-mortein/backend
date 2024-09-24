@@ -1,4 +1,4 @@
-name: Publish SDK
+name: Publish Packages
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           echo current-sdk-version=${sdk_version} >> $GITHUB_OUTPUT
           echo current-types-version=${types_version} >> $GITHUB_OUTPUT
 
-          (gh release list --repo deco3801-mortein/api --json tagName --jq '.[].tagName' \
+          (gh api /orgs/deco3801-mortein/packages/npm/mortein-sdk/versions --jq '.[].name' \
             | (grep --fixed-strings "v${sdk_version}" > /dev/null) \
             && echo sdk-version-exists=true || echo sdk-version-exists=false) >> $GITHUB_OUTPUT
 
@@ -40,7 +40,8 @@ jobs:
     if: ${{ ! fromJson(needs.check-version.outputs.sdk-version-exists) }}
     needs: check-version
     permissions:
-      contents: write
+      contents: read
+      packages: write
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -57,14 +58,13 @@ jobs:
         with:
           node-version: "20"
           cache: npm
+          registry-url: "https://npm.pkg.github.com"
       - run: npm clean-install
 
       - run: ./generate-sdk.sh
-      - run: gh release create --generate-notes "v${VERSION}" "mortein-sdk/dist/mortein-sdk-${VERSION}.tgz"
+      - run: npm publish ./mortein-sdk
         env:
-          GH_TOKEN: ${{ github.token }}
-          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_SDK_PAT }}
-          VERSION: ${{ needs.check-version.outputs.current-sdk-version }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-types:
     environment: deployment
