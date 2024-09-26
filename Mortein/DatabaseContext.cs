@@ -9,7 +9,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     /// <summary>
     /// Interface for interacting with devices in the database.
     /// </summary>
-    public DbSet<Device> Devices { get; set; } = null!;
+    public DbSet<Device> Devices { get; set; }
 
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
