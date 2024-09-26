@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mortein.Types;
 
@@ -11,6 +12,7 @@ public class Device
     /// <summary>
     /// The unique identifier of a device.
     /// </summary>
+    [Key]
     public Guid Id { get; set; }
 
     /// <summary>
