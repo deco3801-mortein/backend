@@ -11,6 +11,11 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     /// </summary>
     public DbSet<Device> Devices { get; set; }
 
+    /// <summary>
+    /// Interface for interacting with healthcheck data in the database.
+    /// </summary>
+    public DbSet<HealthcheckDatum> HealthcheckData { get; set; }
+
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
