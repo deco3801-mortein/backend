@@ -372,7 +372,10 @@
                 }
             },
             "mortein.types": {
-                "type": "Project"
+                "type": "Project",
+                "dependencies": {
+                    "Microsoft.EntityFrameworkCore": "[8.0.8, )"
+                }
             }
         }
     }
