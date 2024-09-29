@@ -50,13 +50,16 @@ public class HealthcheckDataController(DatabaseContext context) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<HealthcheckDatum?> GetLatestHealthcheckDatumForDevice(Guid deviceId)
     {
-        var datum = _context.HealthcheckData
-            .Where(datum => datum.DeviceId == deviceId)
-            .OrderByDescending(datum => datum.Timestamp)
-            .First();
-
-        return datum == null
-            ? (ActionResult<HealthcheckDatum?>)NotFound()
-            : (ActionResult<HealthcheckDatum?>)datum;
+        try
+        {
+            return _context.HealthcheckData
+                .Where(datum => datum.DeviceId == deviceId)
+                .OrderByDescending(datum => datum.Timestamp)
+                .First();
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
     }
 }
