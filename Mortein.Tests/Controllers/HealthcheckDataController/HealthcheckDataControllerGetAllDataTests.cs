@@ -101,5 +101,7 @@ public partial class HealthcheckDataControllerTests
         }
 
         databaseContextFixture.databaseContext.SaveChanges();
+
+        await deviceController.DeleteDevice(device.Id);
     }
 }
