@@ -63,6 +63,16 @@
                     "Npgsql": "8.0.3"
                 }
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": {
+                "type": "Direct",
+                "requested": "[8.0.4, )",
+                "resolved": "8.0.4",
+                "contentHash": "IJqmyj4BkqbCAm1MDZEwaUuxzYVbhtqghfkP2B9u089uCQgOtdcGbJYQwN2dyxO1ze16VDhTLUZwiq7Us1jdvg==",
+                "dependencies": {
+                    "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4",
+                    "Npgsql.NodaTime": "8.0.3"
+                }
+            },
             "Swashbuckle.AspNetCore": {
                 "type": "Direct",
                 "requested": "[6.7.3, )",
@@ -198,12 +208,29 @@
                 "resolved": "1.6.14",
                 "contentHash": "tTaBT8qjk3xINfESyOPE2rIellPvB7qpVqiWiyA/lACVvz+xOGiXhFUfohcx82NLbi5avzLW0lx+s6oAqQijfw=="
             },
+            "NodaTime": {
+                "type": "Transitive",
+                "resolved": "3.1.12",
+                "contentHash": "nDcUbG0jiEXmV8cOz7V8GnUKlmPJjqZm/R+E2JNnUSdlMoaQ19xSU8GXFLReGs/Nt8xdBfA8XfO77xVboWO1Vg==",
+                "dependencies": {
+                    "System.Runtime.CompilerServices.Unsafe": "4.7.1"
+                }
+            },
             "Npgsql": {
                 "type": "Transitive",
                 "resolved": "8.0.3",
                 "contentHash": "6WEmzsQJCZAlUG1pThKg/RmeF6V+I0DmBBBE/8YzpRtEzhyZzKcK7ulMANDm5CkxrALBEC8H+5plxHWtIL7xnA==",
                 "dependencies": {
                     "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+                }
+            },
+            "Npgsql.NodaTime": {
+                "type": "Transitive",
+                "resolved": "8.0.3",
+                "contentHash": "C0TzQcc4+/6jpRGb/YxphmCwRwSuWde9Yz9GWap1xfX2m6/QkYBhluv/EjsPCTWq3/UZaP9UgiUZKscTLNZt4g==",
+                "dependencies": {
+                    "NodaTime": "3.1.9",
+                    "Npgsql": "8.0.3"
                 }
             },
             "Swashbuckle.AspNetCore.Swagger": {
@@ -227,10 +254,16 @@
                 "resolved": "6.7.3",
                 "contentHash": "exXUT9h++OU70jTCfQALiHzeBthqL7c5IFQm+aa67Hi/6X945t32NtOMO16TaRn44xFXdqMZ2CyMbgnTmx+w2A=="
             },
+            "System.Runtime.CompilerServices.Unsafe": {
+                "type": "Transitive",
+                "resolved": "4.7.1",
+                "contentHash": "zOHkQmzPCn5zm/BH+cxC1XbUS3P4Yoi3xzW7eRgVpDR2tPGSzyMZ17Ig1iRkfJuY0nhxkQQde8pgePNiA7z7TQ=="
+            },
             "mortein.types": {
                 "type": "Project",
                 "dependencies": {
-                    "Microsoft.EntityFrameworkCore": "[8.0.8, )"
+                    "Microsoft.EntityFrameworkCore": "[8.0.8, )",
+                    "NodaTime": "[3.1.12, )"
                 }
             }
         }

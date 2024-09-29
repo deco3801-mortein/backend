@@ -25,7 +25,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};
             Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")};
             Database={Environment.GetEnvironmentVariable("POSTGRES_DB")};
-            """
+            """,
+            options => options.UseNodaTime()
         );
     }
 }

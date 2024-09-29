@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using NodaTime;
 
 namespace Mortein.Types;
 
@@ -19,7 +20,7 @@ public class HealthcheckDatum
     /// <summary>
     /// The timestamp for this data.
     /// </summary>
-    public required DateTime Timestamp { get; set; }
+    public required Instant Timestamp { get; set; }
 
     /// <summary>
     /// The moisture level as a perccentage.
