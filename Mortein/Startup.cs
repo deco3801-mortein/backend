@@ -52,21 +52,22 @@ public class Startup(IConfiguration configuration)
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-            app.UseSwagger(c =>
-                {
-                    c.RouteTemplate = "{documentName}.json";
-                });
-            app.UseSwaggerUI(c =>
-            {
-                c.DocumentTitle = "Mortein API Docs";
-                c.RoutePrefix = "docs";
-                c.SwaggerEndpoint("/openapi.json", "Mortein API");
-            });
         }
         else
         {
             app.UseHttpsRedirection();
         }
+
+        app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "{documentName}.json";
+            });
+        app.UseSwaggerUI(c =>
+        {
+            c.DocumentTitle = "Mortein API Docs";
+            c.RoutePrefix = "docs";
+            c.SwaggerEndpoint("/openapi.json", "Mortein API");
+        });
 
         using (var scope = app.ApplicationServices.CreateScope())
         {
