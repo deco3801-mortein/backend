@@ -25,7 +25,11 @@ public class Startup(IConfiguration configuration)
     /// <summary>
     /// Origins which are allowed to access this API.
     /// </summary>
-    private readonly string[] AllowedOrigins = ["https://vibegrow.pro", "http://localhost:5173"];
+    private readonly string[] AllowedOrigins = [
+        "https://vibegrow.pro",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ];
 
     /// <summary>
     /// Add services to the container.
