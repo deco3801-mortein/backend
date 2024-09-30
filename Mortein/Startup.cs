@@ -22,6 +22,9 @@ public class Startup(IConfiguration configuration)
     /// </summary>
     private readonly string AllowedOriginsCorsPolicy = nameof(AllowedOriginsCorsPolicy);
 
+    /// <summary>
+    /// Origins which are allowed to access this API.
+    /// </summary>
     private readonly string[] AllowedOrigins = ["https://vibegrow.pro", "http://localhost:5173"];
 
     /// <summary>
