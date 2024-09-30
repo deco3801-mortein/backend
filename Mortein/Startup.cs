@@ -18,6 +18,13 @@ public class Startup(IConfiguration configuration)
     public IConfiguration Configuration { get; } = configuration;
 
     /// <summary>
+    /// Name of the CORS policy which defines the allowed origins.
+    /// </summary>
+    private readonly string AllowedOriginsCorsPolicy = nameof(AllowedOriginsCorsPolicy);
+
+    private readonly string[] AllowedOrigins = ["https://vibegrow.pro", "http://localhost:5173"];
+
+    /// <summary>
     /// Add services to the container.
     /// </summary>
     /// 
@@ -25,6 +32,13 @@ public class Startup(IConfiguration configuration)
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddCors(options =>
+        {
+            options.AddPolicy(
+                AllowedOriginsCorsPolicy,
+                policy => policy.WithOrigins(AllowedOrigins)
+            );
+        });
         services.AddDbContext<DatabaseContext>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
@@ -78,6 +92,7 @@ public class Startup(IConfiguration configuration)
         }
 
         app.UseRouting();
+        app.UseCors(AllowedOriginsCorsPolicy);
 
         app.UseEndpoints(endpoints =>
         {
