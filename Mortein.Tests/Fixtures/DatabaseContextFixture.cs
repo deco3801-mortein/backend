@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Mortein.Types;
 
 namespace Mortein.Tests.Fixtures;
 

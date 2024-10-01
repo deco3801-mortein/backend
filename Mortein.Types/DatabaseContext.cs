@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Mortein.Types;
 
-namespace Mortein;
+namespace Mortein.Types;
 
 /// <inheritdoc/>
 public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)

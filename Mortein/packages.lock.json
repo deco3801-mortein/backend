@@ -51,28 +51,6 @@
                     "Microsoft.Extensions.Logging": "8.0.0"
                 }
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-                "type": "Direct",
-                "requested": "[8.0.4, )",
-                "resolved": "8.0.4",
-                "contentHash": "/hHd9MqTRVDgIpsToCcxMDxZqla0HAQACiITkq1+L9J2hmHKV6lBAPlauF+dlNSfHpus7rrljWx4nAanKD6qAw==",
-                "dependencies": {
-                    "Microsoft.EntityFrameworkCore": "8.0.4",
-                    "Microsoft.EntityFrameworkCore.Abstractions": "8.0.4",
-                    "Microsoft.EntityFrameworkCore.Relational": "8.0.4",
-                    "Npgsql": "8.0.3"
-                }
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": {
-                "type": "Direct",
-                "requested": "[8.0.4, )",
-                "resolved": "8.0.4",
-                "contentHash": "IJqmyj4BkqbCAm1MDZEwaUuxzYVbhtqghfkP2B9u089uCQgOtdcGbJYQwN2dyxO1ze16VDhTLUZwiq7Us1jdvg==",
-                "dependencies": {
-                    "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4",
-                    "Npgsql.NodaTime": "8.0.3"
-                }
-            },
             "Swashbuckle.AspNetCore": {
                 "type": "Direct",
                 "requested": "[6.7.3, )",
@@ -224,6 +202,26 @@
                     "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
                 }
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+                "type": "Transitive",
+                "resolved": "8.0.4",
+                "contentHash": "/hHd9MqTRVDgIpsToCcxMDxZqla0HAQACiITkq1+L9J2hmHKV6lBAPlauF+dlNSfHpus7rrljWx4nAanKD6qAw==",
+                "dependencies": {
+                    "Microsoft.EntityFrameworkCore": "8.0.4",
+                    "Microsoft.EntityFrameworkCore.Abstractions": "8.0.4",
+                    "Microsoft.EntityFrameworkCore.Relational": "8.0.4",
+                    "Npgsql": "8.0.3"
+                }
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": {
+                "type": "Transitive",
+                "resolved": "8.0.4",
+                "contentHash": "IJqmyj4BkqbCAm1MDZEwaUuxzYVbhtqghfkP2B9u089uCQgOtdcGbJYQwN2dyxO1ze16VDhTLUZwiq7Us1jdvg==",
+                "dependencies": {
+                    "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4",
+                    "Npgsql.NodaTime": "8.0.3"
+                }
+            },
             "Npgsql.NodaTime": {
                 "type": "Transitive",
                 "resolved": "8.0.3",
@@ -263,7 +261,9 @@
                 "type": "Project",
                 "dependencies": {
                     "Microsoft.EntityFrameworkCore": "[8.0.8, )",
-                    "NodaTime": "[3.1.12, )"
+                    "NodaTime": "[3.1.12, )",
+                    "Npgsql.EntityFrameworkCore.PostgreSQL": "[8.0.4, )",
+                    "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "[8.0.4, )"
                 }
             }
         }
