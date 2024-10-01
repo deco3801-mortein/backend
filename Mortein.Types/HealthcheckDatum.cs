@@ -18,7 +18,12 @@ public class HealthcheckDatum
     public Guid DeviceId { get; set; }
 
     /// <summary>
-    /// The timestamp for this data.
+    /// The device represented by this datum
+    /// </summary>
+    public Device Device { get; set; } = null!;
+
+    /// <summary>
+    /// The timestamp for this datum.
     /// </summary>
     public required Instant Timestamp { get; set; }
 
