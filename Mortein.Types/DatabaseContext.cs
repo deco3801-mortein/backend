@@ -3,8 +3,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Mortein.Types;
 
 /// <inheritdoc/>
-public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
+public class DatabaseContext : DbContext
 {
+    public DatabaseContext() { }
+
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
     /// <summary>
     /// Interface for interacting with devices in the database.
     /// </summary>

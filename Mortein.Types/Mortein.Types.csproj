@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
     </PropertyGroup>
 
     <PropertyGroup>
