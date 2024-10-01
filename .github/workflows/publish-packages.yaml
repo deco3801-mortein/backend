@@ -28,7 +28,7 @@ jobs:
           echo current-types-version=${types_version} >> $GITHUB_OUTPUT
 
           (gh api /orgs/deco3801-mortein/packages/npm/mortein-sdk/versions --jq '.[].name' \
-            | (grep --fixed-strings "v${sdk_version}" > /dev/null) \
+            | (grep --fixed-strings "${sdk_version}" > /dev/null) \
             && echo sdk-version-exists=true || echo sdk-version-exists=false) >> $GITHUB_OUTPUT
 
           (gh api /orgs/deco3801-mortein/packages/nuget/Mortein.Types/versions --jq '.[].name' \
