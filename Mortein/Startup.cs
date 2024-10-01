@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Mortein.Types;
 using System.Reflection;
 
 namespace Mortein;
