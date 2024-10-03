@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mortein.Types;
 
-namespace Mortein.Tests.Fixtures;
+namespace Mortein.UnitTests.Fixtures;
 
 public class DatabaseContextFixture : IDisposable
 {

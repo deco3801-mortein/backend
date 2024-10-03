@@ -2,7 +2,7 @@ using Faker;
 using Microsoft.AspNetCore.Mvc;
 using Mortein.Types;
 
-namespace Mortein.Tests.Controllers.DeviceController;
+namespace Mortein.UnitTests.Controllers.DeviceController;
 
 [Collection("Sequential")]
 public partial class DeviceControllerTests

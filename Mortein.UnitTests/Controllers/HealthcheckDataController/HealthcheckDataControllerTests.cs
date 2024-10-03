@@ -1,6 +1,6 @@
-using Mortein.Tests.Fixtures;
+using Mortein.UnitTests.Fixtures;
 
-namespace Mortein.Tests.Controllers.HealthcheckDataController;
+namespace Mortein.UnitTests.Controllers.HealthcheckDataController;
 
 public partial class HealthcheckDataControllerTests(DatabaseContextFixture databaseContextFixture)
     : IClassFixture<DatabaseContextFixture>
