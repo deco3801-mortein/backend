@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using NodaTime;
 
@@ -20,6 +21,7 @@ public class HealthcheckDatum
     /// <summary>
     /// The device represented by this datum
     /// </summary>
+    [JsonIgnore]
     public Device Device { get; set; } = null!;
 
     /// <summary>

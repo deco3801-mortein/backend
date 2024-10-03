@@ -1,5 +1,6 @@
 using Microsoft.OpenApi.Models;
 using Mortein.Types;
+using NodaTime.Serialization.SystemTextJson;
 using System.Reflection;
 
 namespace Mortein;
@@ -39,7 +40,10 @@ public class Startup(IConfiguration configuration)
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(NodaConverters.InstantConverter);
+        });
         services.AddCors(options =>
         {
             options.AddPolicy(
