@@ -51,6 +51,15 @@
                     "Microsoft.Extensions.Logging": "8.0.0"
                 }
             },
+            "NodaTime.Serialization.SystemTextJson": {
+                "type": "Direct",
+                "requested": "[1.2.0, )",
+                "resolved": "1.2.0",
+                "contentHash": "HNMQdHw6xCrNaHEEvJlBek+uUNI4uySEQhU3t8FibZT9ASMz40y5qkLIwhrHsnXhxUzOPP4tmAGy8PfBwc3zMg==",
+                "dependencies": {
+                    "NodaTime": "[3.0.0, 4.0.0)"
+                }
+            },
             "Swashbuckle.AspNetCore": {
                 "type": "Direct",
                 "requested": "[6.7.3, )",
