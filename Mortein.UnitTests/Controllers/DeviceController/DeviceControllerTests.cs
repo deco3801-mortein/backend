@@ -1,6 +1,6 @@
-using Mortein.Tests.Fixtures;
+using Mortein.UnitTests.Fixtures;
 
-namespace Mortein.Tests.Controllers.DeviceController;
+namespace Mortein.UnitTests.Controllers.DeviceController;
 
 public partial class DeviceControllerTests(DatabaseContextFixture databaseContextFixture)
     : IClassFixture<DatabaseContextFixture>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Mortein.Types;
 using NodaTime;
 
-namespace Mortein.Tests.Controllers.HealthcheckDataController;
+namespace Mortein.UnitTests.Controllers.HealthcheckDataController;
 
 public partial class HealthcheckDataControllerTests
 {
