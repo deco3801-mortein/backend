@@ -51,6 +51,12 @@
                     "Microsoft.Extensions.Logging": "8.0.0"
                 }
             },
+            "MQTTnet": {
+                "type": "Direct",
+                "requested": "[4.3.7.1207, )",
+                "resolved": "4.3.7.1207",
+                "contentHash": "ah7aHXoedWp5m5a4zy2u4phOEVj0QFYzOb5tFKQeV8RRBrxp+1QREF4ymZuG8D+hzB2dhtrrG81WxTFv0PzOeQ=="
+            },
             "NodaTime.Serialization.SystemTextJson": {
                 "type": "Direct",
                 "requested": "[1.2.0, )",
