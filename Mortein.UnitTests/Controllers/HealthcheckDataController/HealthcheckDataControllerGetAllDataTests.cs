@@ -5,7 +5,6 @@ using NodaTime;
 
 namespace Mortein.UnitTests.Controllers.HealthcheckDataController;
 
-[Collection("Sequential")]
 public partial class HealthcheckDataControllerTests
 {
     [Fact]
@@ -47,16 +46,16 @@ public partial class HealthcheckDataControllerTests
             IsVibrating = Faker.Boolean.Random(),
         };
 
-        databaseContextFixture.databaseContext.HealthcheckData.Add(healthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.HealthcheckData.Add(healthcheckDatum);
+        databaseContext.SaveChanges();
 
         var data = healthcheckDataController.GetAllHealthcheckDataForDevice(device.Id);
 
         var datum = Assert.Single(data);
         Assert.Equal(datum, healthcheckDatum);
 
-        databaseContextFixture.databaseContext.HealthcheckData.Remove(healthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.HealthcheckData.Remove(healthcheckDatum);
+        databaseContext.SaveChanges();
 
         await deviceController.DeleteDevice(device.Id);
     }
@@ -83,13 +82,13 @@ public partial class HealthcheckDataControllerTests
                 IsVibrating = Faker.Boolean.Random(),
             };
 
-            databaseContextFixture.databaseContext.HealthcheckData.Add(healthcheckDatum);
+            databaseContext.HealthcheckData.Add(healthcheckDatum);
             expectedData.Add(healthcheckDatum);
         }
 
         expectedData.Reverse();
 
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.SaveChanges();
 
         var actualData = healthcheckDataController.GetAllHealthcheckDataForDevice(device.Id);
 
@@ -97,10 +96,10 @@ public partial class HealthcheckDataControllerTests
 
         foreach (var healthcheckDatum in expectedData)
         {
-            databaseContextFixture.databaseContext.HealthcheckData.Remove(healthcheckDatum);
+            databaseContext.HealthcheckData.Remove(healthcheckDatum);
         }
 
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.SaveChanges();
 
         await deviceController.DeleteDevice(device.Id);
     }

@@ -4,7 +4,6 @@ using Mortein.Types;
 
 namespace Mortein.UnitTests.Controllers.DeviceController;
 
-[Collection("Sequential")]
 public partial class DeviceControllerTests
 {
     [Fact]
