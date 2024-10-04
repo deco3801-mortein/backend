@@ -5,7 +5,6 @@ using NodaTime;
 
 namespace Mortein.UnitTests.Controllers.HealthcheckDataController;
 
-[Collection("Sequential")]
 public partial class HealthcheckDataControllerTests
 {
     [Fact]
