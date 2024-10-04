@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Mortein.Mqtt.Extensions;
 using Mortein.Types;
 using NodaTime.Serialization.SystemTextJson;
 using System.Reflection;
@@ -23,7 +24,7 @@ public class Startup(IConfiguration configuration)
     /// Add services to the container.
     /// </summary>
     /// 
-    /// <param name="services"></param>
+    /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers().AddJsonOptions(options =>
@@ -36,6 +37,7 @@ public class Startup(IConfiguration configuration)
         });
         services.AddDbContext<DatabaseContext>();
         services.AddEndpointsApiExplorer();
+        services.AddMqttClientHostedService();
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("openapi", new OpenApiInfo()
