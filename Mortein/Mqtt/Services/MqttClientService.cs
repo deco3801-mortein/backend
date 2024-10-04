@@ -6,7 +6,7 @@ namespace Mortein.Mqtt.Services;
 /// <summary>
 /// ASP.NET Service which provides a managed MQTT client.
 /// </summary>
-/// 
+///
 /// <param name="options">MQTT client configuration options.</param>
 /// <param name="logger">Logging facility.</param>
 public class MqttClientService(MqttClientOptions options, ILogger<MqttClientService> logger)

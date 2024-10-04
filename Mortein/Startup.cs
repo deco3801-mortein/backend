@@ -10,20 +10,20 @@ namespace Mortein;
 /// Configure the application's startup.
 /// </summary>
 /// <remarks>
-/// 
+///
 /// </remarks>
 /// <param name="configuration"></param>
 public class Startup(IConfiguration configuration)
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public IConfiguration Configuration { get; } = configuration;
 
     /// <summary>
     /// Add services to the container.
     /// </summary>
-    /// 
+    ///
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     public void ConfigureServices(IServiceCollection services)
     {
@@ -55,7 +55,7 @@ public class Startup(IConfiguration configuration)
     /// <summary>
     /// Configure the HTTP request pipeline.
     /// </summary>
-    /// 
+    ///
     /// <param name="app"></param>
     /// <param name="env"></param>
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

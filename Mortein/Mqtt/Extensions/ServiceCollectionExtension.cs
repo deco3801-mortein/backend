@@ -19,9 +19,9 @@ public static class ServiceCollectionExtension
     /// <summary>
     /// Registers a hosted MQTT client as a service in the <see cref="IServiceCollection" />.
     /// </summary>
-    /// 
+    ///
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// 
+    ///
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     public static IServiceCollection AddMqttClientHostedService(this IServiceCollection services)
     {
@@ -47,12 +47,12 @@ public static class ServiceCollectionExtension
     /// <summary>
     /// Registers a hosted MQTT client as a service in the <see cref="IServiceCollection" />.
     /// </summary>
-    /// 
+    ///
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="configure">
     /// A required action to configure the <see cref="MqttClientOptionsBuilder" /> for the client.
     /// </param>
-    /// 
+    ///
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     private static IServiceCollection AddMqttClientServiceWithConfig(this IServiceCollection services, Action<MqttClientOptionsBuilder> configure)
     {
