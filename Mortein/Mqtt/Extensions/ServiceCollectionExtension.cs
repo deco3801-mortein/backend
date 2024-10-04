@@ -1,5 +1,6 @@
 using Mortein.Mqtt.Services;
 using MQTTnet.Client;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Mortein.Mqtt.Extensions;
 
@@ -9,6 +10,10 @@ namespace Mortein.Mqtt.Extensions;
 /// </summary>
 public static class ServiceCollectionExtension
 {
+    private const string MQTT_CLIENT_ID = "api";
+
+    private static readonly X509Certificate2 certificate;
+
     /// <summary>
     /// Registers a hosted MQTT client as a service in the <see cref="IServiceCollection" />.
     /// </summary>
@@ -18,7 +23,22 @@ public static class ServiceCollectionExtension
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     public static IServiceCollection AddMqttClientHostedService(this IServiceCollection services)
     {
-        services.AddMqttClientServiceWithConfig(_ => { });
+        services.AddMqttClientServiceWithConfig(optionsBuilder =>
+        {
+            optionsBuilder
+                .WithClientId(MQTT_CLIENT_ID)
+                .WithoutPacketFragmentation()
+                .WithTcpServer(Environment.GetEnvironmentVariable("MQTT_BROKER_HOSTNAME"))
+                .WithTlsOptions(options =>
+                {
+                    options
+                        .UseTls()
+                        .WithAllowUntrustedCertificates(false)
+                        .WithClientCertificates([certificate])
+                        .WithIgnoreCertificateChainErrors(false)
+                        .WithIgnoreCertificateRevocationErrors(false);
+                });
+        });
         return services;
     }
 
