@@ -12,7 +12,9 @@ public static class ServiceCollectionExtension
 {
     private const string MQTT_CLIENT_ID = "api";
 
-    private static readonly X509Certificate2 certificate;
+    // TODO: read from somewhere other than the local filesystem.
+    private static readonly X509Certificate2 certificate
+        = new("/workspaces/api/api.pfx", "", X509KeyStorageFlags.Exportable);
 
     /// <summary>
     /// Registers a hosted MQTT client as a service in the <see cref="IServiceCollection" />.
