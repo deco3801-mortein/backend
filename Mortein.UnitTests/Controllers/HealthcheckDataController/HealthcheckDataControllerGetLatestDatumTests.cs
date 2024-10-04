@@ -30,6 +30,20 @@ public partial class HealthcheckDataControllerTests
     }
 
     [Fact]
+    public async void GetLatestDatumWithNoDatumDeviceRespondsWith404()
+    {
+        var createResult = await deviceController.CreateDevice(Lorem.Sentence());
+        var createAction = Assert.IsType<CreatedAtActionResult>(createResult.Result);
+        var device = Assert.IsType<Device>(createAction.Value);
+
+        var getResult = healthcheckDataController.GetLatestHealthcheckDatumForDevice(Guid.NewGuid());
+
+        Assert.IsType<NotFoundResult>(getResult.Result);
+
+        await deviceController.DeleteDevice(device.Id);
+    }
+
+    [Fact]
     public async void GetLatestDatumGetsOneDatum()
     {
         var createResult = await deviceController.CreateDevice(Lorem.Sentence());
