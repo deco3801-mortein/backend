@@ -46,16 +46,16 @@ public partial class HealthcheckDataControllerTests
             IsVibrating = Faker.Boolean.Random(),
         };
 
-        databaseContextFixture.databaseContext.HealthcheckData.Add(healthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.HealthcheckData.Add(healthcheckDatum);
+        databaseContext.SaveChanges();
 
         var getResult = healthcheckDataController.GetLatestHealthcheckDatumForDevice(device.Id);
 
         var retrievedHealthcheckDatum = Assert.IsType<HealthcheckDatum>(getResult.Value);
         Assert.Equal(healthcheckDatum, retrievedHealthcheckDatum);
 
-        databaseContextFixture.databaseContext.Remove(healthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.Remove(healthcheckDatum);
+        databaseContext.SaveChanges();
 
         await deviceController.DeleteDevice(device.Id);
     }
@@ -87,16 +87,16 @@ public partial class HealthcheckDataControllerTests
             IsVibrating = Faker.Boolean.Random(),
         };
 
-        databaseContextFixture.databaseContext.HealthcheckData.AddRange(healthcheckDatum, latestHealthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.HealthcheckData.AddRange(healthcheckDatum, latestHealthcheckDatum);
+        databaseContext.SaveChanges();
 
         var getResult = healthcheckDataController.GetLatestHealthcheckDatumForDevice(device.Id);
 
         var retrievedHealthcheckDatum = Assert.IsType<HealthcheckDatum>(getResult.Value);
         Assert.Equal(latestHealthcheckDatum, retrievedHealthcheckDatum);
 
-        databaseContextFixture.databaseContext.RemoveRange(healthcheckDatum, latestHealthcheckDatum);
-        databaseContextFixture.databaseContext.SaveChanges();
+        databaseContext.RemoveRange(healthcheckDatum, latestHealthcheckDatum);
+        databaseContext.SaveChanges();
 
         await deviceController.DeleteDevice(device.Id);
     }
