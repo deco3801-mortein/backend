@@ -14,6 +14,11 @@ public class MqttClientService(MqttClientOptions options, ILogger<MqttClientServ
 {
     private readonly IMqttClient mqttClient = new MqttFactory().CreateMqttClient();
 
+    /// <summary>
+    /// Underlying MQTT Client connection.
+    /// </summary>
+    public IMqttClient MqttClient => mqttClient;
+
     private readonly MqttClientOptions options = options;
 
     private readonly ILogger<MqttClientService> _logger = logger;
