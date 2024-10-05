@@ -10,8 +10,6 @@ namespace Mortein.Mqtt.Extensions;
 /// </summary>
 public static class ServiceCollectionExtension
 {
-    private const string MQTT_CLIENT_ID = "api";
-
     // TODO: read from somewhere other than the local filesystem.
     private static readonly X509Certificate2 certificate
         = new("/workspaces/api/api.pfx", "", X509KeyStorageFlags.Exportable);
@@ -28,7 +26,7 @@ public static class ServiceCollectionExtension
         services.AddMqttClientServiceWithConfig(optionsBuilder =>
         {
             optionsBuilder
-                .WithClientId(MQTT_CLIENT_ID)
+                .WithClientId(Environment.GetEnvironmentVariable("MQTT_CLIENT_ID"))
                 .WithoutPacketFragmentation()
                 .WithTcpServer(Environment.GetEnvironmentVariable("MQTT_BROKER_HOSTNAME"))
                 .WithTlsOptions(options =>
