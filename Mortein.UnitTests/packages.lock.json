@@ -239,6 +239,11 @@
                     "Newtonsoft.Json": "13.0.1"
                 }
             },
+            "MQTTnet": {
+                "type": "Transitive",
+                "resolved": "4.3.7.1207",
+                "contentHash": "ah7aHXoedWp5m5a4zy2u4phOEVj0QFYzOb5tFKQeV8RRBrxp+1QREF4ymZuG8D+hzB2dhtrrG81WxTFv0PzOeQ=="
+            },
             "NETStandard.Library": {
                 "type": "Transitive",
                 "resolved": "2.0.3",
@@ -403,6 +408,7 @@
                     "Amazon.Lambda.AspNetCoreServer": "[9.0.0, )",
                     "Amazon.Lambda.Core": "[2.2.0, )",
                     "Amazon.Lambda.Serialization.SystemTextJson": "[2.4.1, )",
+                    "MQTTnet": "[4.3.7.1207, )",
                     "Microsoft.AspNetCore.OpenApi": "[7.0.10, )",
                     "Microsoft.EntityFrameworkCore": "[8.0.8, )",
                     "Mortein.Types": "[1.3.0, )",
